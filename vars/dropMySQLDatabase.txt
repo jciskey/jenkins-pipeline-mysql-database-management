@@ -1,0 +1,20 @@
+<strong>dropMySQLDatabase {...}</strong>
+
+<p>
+    Drops an existing MySQL database via provided parameters.
+    Accepted Parameters:
+        mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
+        mysqlPort: The port to use to connect to MySQL. Default: 3306
+        dbName:    The name of the database to drop. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUser:    The name of the database user to drop the database with.
+        dbPass:    The password of the database user.
+    
+    <strong>Usage</strong>
+    dropMySQLDatabase {
+        mysqlPath = '/usr/bin/mysql'
+        mysqlPort = 3306
+        dbName = 'random_test_db'
+        dbUser = 'db_user'
+        dbPass = 'db_password'
+    }
+</p>

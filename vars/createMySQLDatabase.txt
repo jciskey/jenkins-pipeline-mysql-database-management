@@ -13,9 +13,6 @@
     
     <strong>Usage</strong>
     echo createMySQLDatabase {
-        mysqlPath = '/usr/bin/mysql'
-        mysqlPort = 3306
-        dbName = 'random_test_db'
         dbUser = 'db_user'
         dbPass = 'db_password'
     }

@@ -39,5 +39,5 @@ def call(String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306, String d
     retval.testUsername = test_user_credentials.test_username
     retval.testUserPassword = test_user_credentials.test_password
     
-    return test_user_credentials.test_username
+    return 'test echo'
 }

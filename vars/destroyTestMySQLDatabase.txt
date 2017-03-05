@@ -10,8 +10,5 @@
         dbPass:    The password of the database user.
     
     <strong>Usage</strong>
-    destroyTestMySQLDatabase {
-        dbUser = 'db_user'
-        dbPass = 'db_password'
-    }
+    destroyTestMySQLDatabase(dbUser:'db_user', dbPass:'db_pass')
 </p>

@@ -14,7 +14,7 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-def call(String mysqlPath, String mysqlPort, String dbName, String dbUser, String dbPass) {
+def call(String mysqlPath = null, String mysqlPort = null, String dbName = null, String dbUser = null, String dbPass = null) {
     def body = {
         mysqlPath = mysqlPath
         mysqlPort = mysqlPort

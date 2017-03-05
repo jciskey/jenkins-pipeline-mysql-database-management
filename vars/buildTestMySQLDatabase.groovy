@@ -15,7 +15,8 @@
             testUserPassword: The password of the test user
 */
 def call(String mysqlPath = null, String mysqlPort = null, String dbName = null, String dbUser = null, String dbPass = null) {
-    def body = {
+    // Create the test database
+    def createdDatabaseName = createMySQLDatabase {
         mysqlPath = mysqlPath
         mysqlPort = mysqlPort
         dbName = dbName
@@ -23,11 +24,14 @@ def call(String mysqlPath = null, String mysqlPort = null, String dbName = null,
         dbPass = dbPass
     }
     
-    // Create the test database
-    def createdDatabaseName = createMySQLDatabase(body)
-    
     // Create the test user
-    def test_user_credentials = createTestMySQLUser(body)
+    def test_user_credentials = createTestMySQLUser {
+        mysqlPath = mysqlPath
+        mysqlPort = mysqlPort
+        dbName = dbName
+        dbUser = dbUser
+        dbPass = dbPass
+    }
     
     // Return the test database name and the test user credentials
     def retval = [:]

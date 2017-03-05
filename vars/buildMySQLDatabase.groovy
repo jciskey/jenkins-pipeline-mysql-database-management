@@ -31,6 +31,9 @@ def call(body) {
     }
     
     // Run shell commands to create the database here
+    def CREATE_SQL = "CREATE DATABASE ${config.dbName};"
+    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" -p\"${config.dbPass}\" \"${config.dbName}\" <<-EOF\n${CREATE_SQL}\nEOF"
+    sh "${SHELL_CMD}"
     
     // Return the name of the created database
     return config.dbName

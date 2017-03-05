@@ -19,13 +19,17 @@ pipeline {
             steps {
                 // Setup the database
                 script {
-                    def test_database_credentials = buildTestMySQLDatabase {
-                        dbUser = 'db_user'
-                        dbPass = 'db_password'
+                    withCredentials([string(credentialsId: 'jenkins-database-username', variable: 'DATABASE_USERNAME')]) {
+                        withCredentials([string(credentialsId: 'jenkins-database-password', variable: 'DATABASE_PASSWORD')]) {
+                            def test_database_credentials = buildTestMySQLDatabase {
+                                dbUser = env.DATABASE_USERNAME
+                                dbPass = env.DATABASE_PASSWORD
+                            }
+                            echo 'Test Database Name: ' + test_database_credentials.dbName
+                            echo 'Test Username: ' + test_database_credentials.testUsername
+                            echo 'Test User Password: ' + test_database_credentials.testUserPassword
+                        }
                     }
-                    echo 'Test Database Name: ' + test_database_credentials.dbName
-                    echo 'Test Username: ' + test_database_credentials.testUsername
-                    echo 'Test User Password: ' + test_database_credentials.testUserPassword
                 }
             }
         }
@@ -48,8 +52,8 @@ pipeline {
     post {
         always {
             destroyTestMySQLDatabase {
-                dbUser = 'db_user'
-                dbPass = 'db_password'
+                dbUser = credentials('jenkins-database-username')
+                dbPass = credentials('jenkins-database-password')
             }
         }
     }

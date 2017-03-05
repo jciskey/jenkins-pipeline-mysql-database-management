@@ -10,7 +10,7 @@
     
     Returns the name of the created database.
 */
-def call(body) {
+def call(Closure body) {
     def config = evaluateMySQLDatabaseConfiguration(body)
     
     // Run shell commands to create the database here

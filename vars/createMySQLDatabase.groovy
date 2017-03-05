@@ -11,24 +11,7 @@
     Returns the name of the created database.
 */
 def call(body) {
-    // evaluate the body block, and collect configuration into the object
-    def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
-    body()
-    
-    // Set any unprovided configuration values to defaults
-    config.dbName = config.dbName ?: "testdb_${env.BUILD_NUMBER}"
-    config.mysqlPath = config.mysqlPath ?: '/usr/bin/mysql'
-    config.mysqlPort = config.mysqlPort ?: 3306
-    
-    // Check that required, non-defaultable values are present
-    if (config.dbUser == null) {
-        error "Missing required parameter 'dbUser'"
-    }
-    if (config.dbPass == null) {
-        error "Missing required parameter 'dbPass'"
-    }
+    def config = evaluateMySQLDatabaseConfiguration(body)
     
     // Run shell commands to create the database here
     def CREATE_SQL = "CREATE DATABASE IF NOT EXISTS ${config.dbName};"

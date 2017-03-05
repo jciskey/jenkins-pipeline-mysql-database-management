@@ -16,10 +16,7 @@
             testUserPassword: The password of the test user
     
     <strong>Usage</strong>
-    def test_database_credentials = buildTestMySQLDatabase {
-        dbUser = 'db_user'
-        dbPass = 'db_password'
-    }
+    def test_database_credentials = buildTestMySQLDatabase(dbUser:'db_user', dbPass:'db_pass')
     echo 'Test Database Name: ' + test_database_credentials.dbName
     echo 'Test Username: ' + test_database_credentials.testUsername
     echo 'Test User Password: ' + test_database_credentials.testUserPassword

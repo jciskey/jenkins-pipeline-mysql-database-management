@@ -12,11 +12,11 @@
     Returns the name of the created database.
     
     <strong>Usage</strong>
-    def createdDatabaseName = buildMySQLDatabase {
+    echo buildMySQLDatabase {
         mysqlPath = '/usr/bin/mysql'
         mysqlPort = 3306
         dbName = 'random_test_db'
-        dbUser = env.dbUsername
-        dbPass = env.dbPassword
+        dbUser = 'db_user'
+        dbPass = 'db_password'
     }
 </p>

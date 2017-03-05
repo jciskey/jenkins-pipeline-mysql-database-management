@@ -8,7 +8,7 @@
         dbUser:    The name of the database user to drop the database with.
         dbPass:    The password of the database user.
 */
-def call(body) {
+def call(Closure body) {
     def config = evaluateMySQLDatabaseConfiguration(body)
     
     // Run shell commands to drop the database here

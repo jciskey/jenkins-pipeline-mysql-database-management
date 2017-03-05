@@ -1,4 +1,4 @@
-<strong>buildMySQLDatabase {...}</strong>
+<strong>createMySQLDatabase {...}</strong>
 
 <p>
     Creates a new MySQL database via provided parameters.
@@ -12,7 +12,7 @@
     Returns the name of the created database.
     
     <strong>Usage</strong>
-    echo buildMySQLDatabase {
+    echo createMySQLDatabase {
         mysqlPath = '/usr/bin/mysql'
         mysqlPort = 3306
         dbName = 'random_test_db'

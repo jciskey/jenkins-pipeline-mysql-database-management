@@ -35,9 +35,9 @@ def call(String mysqlPath = null, String mysqlPort = null, String dbName = null,
     
     // Return the test database name and the test user credentials
     def retval = [:]
-    retval['dbName'] = createdDatabaseName
-    retval['testUsername'] = test_user_credentials.test_username
-    retval['testUserPassword'] = test_user_credentials.test_password
+    retval.dbName = createdDatabaseName
+    retval.testUsername = test_user_credentials.test_username
+    retval.testUserPassword = test_user_credentials.test_password
     
     return retval
 }

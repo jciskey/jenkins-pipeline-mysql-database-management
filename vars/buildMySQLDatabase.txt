@@ -1,0 +1,22 @@
+<strong>buildMySQLDatabase {...}</strong>
+
+<p>
+    Creates a new MySQL database via provided parameters.
+    Accepted Parameters:
+        mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
+        mysqlPort: The port to use to connect to MySQL. Default: 3306
+        dbName:    The name of the database to create. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUser:    The name of the database user to create the database with.
+        dbPass:    The password of the database user.
+    
+    Returns the name of the created database.
+    
+    <strong>Usage</strong>
+    def createdDatabaseName = buildMySQLDatabase {
+        mysqlPath = '/usr/bin/mysql'
+        mysqlPort = 3306
+        dbName = 'random_test_db'
+        dbUser = env.dbUsername
+        dbPass = env.dbPassword
+    }
+</p>

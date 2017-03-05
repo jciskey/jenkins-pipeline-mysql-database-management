@@ -5,7 +5,7 @@
         mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
         mysqlPort: The port to use to connect to MySQL. Default: 3306
         dbName:    The name of the database to create the test user for. Default: "testdb_${env.BUILD_NUMBER}"
-        dbUser:    The name of the database user to create the database with.
+        dbUser:    The name of the database user to create the test user with.
         dbPass:    The password of the database user.
     
     Returns the credentials of the created test user as a Map.

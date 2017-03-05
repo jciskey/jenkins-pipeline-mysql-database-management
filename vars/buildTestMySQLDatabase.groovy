@@ -14,7 +14,15 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-def call(Closure body) {
+def call(String mysqlPath, String mysqlPort, String dbName, String dbUser, String dbPass) {
+    def body = {
+        mysqlPath = mysqlPath
+        mysqlPort = mysqlPort
+        dbName = dbName
+        dbUser = dbUser
+        dbPass = dbPass
+    }
+    
     // Create the test database
     def createdDatabaseName = createMySQLDatabase(body)
     

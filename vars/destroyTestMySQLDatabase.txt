@@ -1,0 +1,17 @@
+<strong>destroyTestMySQLDatabase {...}</strong>
+
+<p>
+    Drops an existing test database via provided parameters.
+    Accepted Parameters:
+        mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
+        mysqlPort: The port to use to connect to MySQL. Default: 3306
+        dbName:    The name of the database to destroy. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUser:    The name of the database user to destroy the database with.
+        dbPass:    The password of the database user.
+    
+    <strong>Usage</strong>
+    destroyTestMySQLDatabase {
+        dbUser = 'db_user'
+        dbPass = 'db_password'
+    }
+</p>

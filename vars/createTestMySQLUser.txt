@@ -1,0 +1,25 @@
+<strong>createTestMySQLUser {...}</strong>
+
+<p>
+    Creates a new test user for a MySQL database via provided parameters.
+    Accepted Parameters:
+        mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
+        mysqlPort: The port to use to connect to MySQL. Default: 3306
+        dbName:    The name of the database to create the test user for. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUser:    The name of the database user to create the test user with.
+        dbPass:    The password of the database user.
+    
+    Returns the credentials of the created test user as a Map.
+        Map Keys:
+            test_username: The username of the test user
+            test_password: The password of the test user
+    
+    <strong>Usage</strong>
+    def test_user_credentials = createTestMySQLUser {
+        dbName = 'random_test_db'
+        dbUser = 'db_user'
+        dbPass = 'db_password'
+    }
+    echo 'Test Username: ' + test_user_credentials.test_username
+    echo 'Test User Password: ' + test_user_credentials.test_password
+</p>

@@ -47,11 +47,9 @@ pipeline {
     }
     post {
         always {
-            script {
-                destroyTestMySQLDatabase {
-                    dbUser = 'db_user'
-                    dbPass = 'db_password'
-                }
+            destroyTestMySQLDatabase {
+                dbUser = 'db_user'
+                dbPass = 'db_password'
             }
         }
     }

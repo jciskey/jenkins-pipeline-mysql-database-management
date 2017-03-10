@@ -21,7 +21,8 @@ def call(Closure body) {
     def test_user_pwd = "testdb_password_${env.BUILD_NUMBER}"
     
     // Run shell commands to create the user here
-    def CREATE_SQL = "CREATE USER '${test_user}'@'%' IDENTIFIED BY '${test_user_pwd}';"
+    def CREATE_SQL = "CREATE USER '${test_user}'@'%' IDENTIFIED BY '${test_user_pwd}';" +
+        "CREATE USER '${test_user}'@'localhost' IDENTIFIED BY '${test_user_pwd}';"
     def GRANT_SQL = "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'%';" +
         "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'localhost';"
     def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}${GRANT_SQL}\nEOF"

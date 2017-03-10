@@ -30,7 +30,7 @@ String call(body) {
     def test_user_credentials = createTestMySQLUser {
         mysqlPath = config.mysqlPath
         mysqlPort = config.mysqlPort
-        dbName = config.dbName
+        dbName = createdDatabaseName
         dbUser = config.dbUser
         dbPass = config.dbPass
     }

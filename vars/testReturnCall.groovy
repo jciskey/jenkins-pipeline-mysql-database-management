@@ -27,5 +27,5 @@ def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null
     retval.username = dbUser
     retval.password = dbPass
     
-    return retval
+    return [username: dbUser, password: dbPass]
 }

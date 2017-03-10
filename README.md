@@ -1,6 +1,7 @@
 # jenkins-pipeline-mysql-database-management
 A shared library of Jenkins Pipeline steps to help setup and teardown MySQL test databases. Customization parameters are provided, but if all you care about is creating a test database and removing it after you're done with it, you can use the defaults and be fine.
 
+# NOTE: THIS LIBRARY IS STILL UNDER HEAVY DEVELOPMENT, IT SHOULD NOT BE USED IN LIVE PROJECTS YET
 
 ## Steps available
 This shared library makes the following steps available to your Declarative Pipeline scripts:

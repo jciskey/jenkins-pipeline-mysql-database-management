@@ -14,7 +14,7 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
+string call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
     return 'test echo start'
     
     // Create the test database

@@ -25,7 +25,15 @@ def call(body) {
     return [username:'test', password:'pass']
 }
 */
-
+/*
 def call(Closure body) {
     echo sh(returnStdout: true, script: 'env')
+}
+*/
+
+def call(Closure body) {
+    def config = [:]
+    //body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
 }

@@ -14,7 +14,7 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-def call(String dbUser = 'db_user', String dbPass = 'db_pass', String dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
+def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
     // Create the test database
     def createdDatabaseName = createMySQLDatabase {
         mysqlPath = mysqlPath

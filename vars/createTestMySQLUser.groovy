@@ -25,7 +25,15 @@ def call(Closure body) {
         "CREATE USER '${test_user}'@'localhost' IDENTIFIED BY '${test_user_pwd}';"
     def GRANT_SQL = "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'%';" +
         "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'localhost';"
-    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}${GRANT_SQL}\nEOF"
+    
+    //def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}${GRANT_SQL}\nEOF"
+    //sh "${SHELL_CMD}"
+    echo "Creating test user '${test_user}'"
+    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}\nEOF"
+    sh "${SHELL_CMD}"
+    
+    echo "Granting permissions for test user '${test_user}'"
+    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${GRANT_SQL}\nEOF"
     sh "${SHELL_CMD}"
     
     // Return the credentials of the new test user

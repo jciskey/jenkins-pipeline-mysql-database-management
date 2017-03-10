@@ -29,12 +29,12 @@ def call(Closure body) {
     //def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}${GRANT_SQL}\nEOF"
     //sh "${SHELL_CMD}"
     echo "Creating test user '${test_user}'"
-    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}\nEOF"
-    sh "${SHELL_CMD}"
+    def CREATE_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}\nEOF"
+    sh "${CREATE_CMD}"
     
     echo "Granting permissions for test user '${test_user}'"
-    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${GRANT_SQL}\nEOF"
-    sh "${SHELL_CMD}"
+    def GRANT_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${GRANT_SQL}\nEOF"
+    sh "${GRANT_CMD}"
     
     // Return the credentials of the new test user
     return [test_username:test_user, test_password:test_user_pwd]

@@ -36,4 +36,7 @@ def call(Closure body) {
     //body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
+    
+    echo config.dbUser
+    echo config.dbPass
 }

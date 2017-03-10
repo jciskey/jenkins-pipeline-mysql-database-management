@@ -15,6 +15,8 @@ def call(Closure body) {
     
     // Run shell commands to create the database here
     def CREATE_SQL = "CREATE DATABASE IF NOT EXISTS ${config.dbName};"
+    
+    echo "Creating database '${config.dbName}'"
     def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}\nEOF"
     sh "${SHELL_CMD}"
     

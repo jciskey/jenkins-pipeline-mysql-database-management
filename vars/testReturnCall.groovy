@@ -21,15 +21,11 @@ def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null
 }
 */
 
-class returnValueClass implements Serializable  {
-    String username, password;
-}
-
 def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
     
     def retval = new returnValueClass()
-    retval.username = dbUser
-    retval.password = dbPass
+    retval.username = 'user'
+    retval.password = 'pass'
     
     return retval
 }

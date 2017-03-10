@@ -37,6 +37,6 @@ def call(Closure body) {
     body.delegate = config
     body()
     
-    echo config.dbUser
-    echo config.dbPass
+    //echo config.dbUser
+    //echo config.dbPass
 }

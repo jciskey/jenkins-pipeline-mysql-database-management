@@ -25,16 +25,20 @@ def call(Closure body) {
         "CREATE USER '${test_user}'@'localhost' IDENTIFIED BY '${test_user_pwd}';"
     def GRANT_SQL = "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'%';" +
         "GRANT ALL PRIVILEGES ON ${config.dbName}.* TO '${test_user}'@'localhost';"
+    def FLUSH_SQL = "FLUSH PRIVILEGES;"
     
-    //def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}${GRANT_SQL}\nEOF"
-    //sh "${SHELL_CMD}"
-    echo "Creating test user '${test_user}'"
     def CREATE_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${CREATE_SQL}\nEOF"
+    def GRANT_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${GRANT_SQL}\nEOF"
+    def FLUSH_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${FLUSH_SQL}\nEOF"
+    
+    echo "Creating test user '${test_user}'"
     sh "${CREATE_CMD}"
     
     echo "Granting permissions for test user '${test_user}'"
-    def GRANT_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${GRANT_SQL}\nEOF"
     sh "${GRANT_CMD}"
+    
+    echo "Refreshing database privileges for the new test user"
+    sh "${FLUSH_CMD}"
     
     // Return the credentials of the new test user
     return [test_username:test_user, test_password:test_user_pwd]

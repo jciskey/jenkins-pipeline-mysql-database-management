@@ -24,8 +24,8 @@ def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null
 def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
     
     def retval = [:]
-    retval['username'] = dbUser
-    retval['password'] = dbPass
+    retval.username = dbUser
+    retval.password = dbPass
     
     return retval
 }

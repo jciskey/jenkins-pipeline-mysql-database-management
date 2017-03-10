@@ -14,25 +14,25 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-String call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null, String mysqlPath = '/usr/bin/mysql', Integer mysqlPort = 3306) {
-    return 'test echo start'
+String call(body) {
+    def config = evaluateMySQLDatabaseConfiguration(body)
     
     // Create the test database
     def createdDatabaseName = createMySQLDatabase {
-        mysqlPath = mysqlPath
-        mysqlPort = mysqlPort
-        dbName = dbName
-        dbUser = dbUser
-        dbPass = dbPass
+        mysqlPath = config.mysqlPath
+        mysqlPort = config.mysqlPort
+        dbName = config.dbName
+        dbUser = config.dbUser
+        dbPass = config.dbPass
     }
     
     // Create the test user
     def test_user_credentials = createTestMySQLUser {
-        mysqlPath = mysqlPath
-        mysqlPort = mysqlPort
-        dbName = dbName
-        dbUser = dbUser
-        dbPass = dbPass
+        mysqlPath = config.mysqlPath
+        mysqlPort = config.mysqlPort
+        dbName = config.dbName
+        dbUser = config.dbUser
+        dbPass = config.dbPass
     }
     
     // Return the test database name and the test user credentials
@@ -41,5 +41,5 @@ String call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = n
     retval.testUsername = test_user_credentials.test_username
     retval.testUserPassword = test_user_credentials.test_password
     
-    return 'test echo end'
+    return retval
 }

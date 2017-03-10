@@ -20,7 +20,12 @@ def call(String dbUser = 'db_user', String dbPass = 'db_pass', def dbName = null
     return 'test multiple parameters defined'
 }
 */
-
+/*
 def call(body) {
     return [username:'test', password:'pass']
+}
+*/
+
+def call(Closure body) {
+    echo sh(returnStdout: true, script: 'env')
 }

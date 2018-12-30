@@ -20,7 +20,7 @@ def call(Closure body) {
     body()
     String uuid = UUID.randomUUID()
     config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
-    if ( nv.MYSQL_UUID == null || env.MYSQL_UUID == '') {
+    if (env.MYSQL_UUID == null || env.MYSQL_UUID == '') {
         env.MYSQL_UUID = config.uuid
     }
     // Set any unprovided configuration values to defaults

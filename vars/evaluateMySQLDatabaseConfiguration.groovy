@@ -18,17 +18,19 @@ def call(Closure body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
-    String uuid = UUID.randomUUID()
-    config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
-    if (env.MYSQL_UUID == null || env.MYSQL_UUID == '') {
-        env.MYSQL_UUID = config.uuid
-    }
+
     // Set any unprovided configuration values to defaults
     // Set any unprovided configuration to random generated.
     if (config.dbName == null || config.dbName == '') {
         String dbNameConstructed = "testdb_" + env.MYSQL_UUID
         config.dbName = dbNameConstructed
     }
+
+    // Set newDB variable to true if not specified.
+    if (config.newDB == null | config.newDB == '') {
+        config.newDB = true
+    }
+
     config.mysqlPath = config.mysqlPath ?: '/usr/bin/mysql'
     config.mysqlPort = config.mysqlPort ?: 3306
     

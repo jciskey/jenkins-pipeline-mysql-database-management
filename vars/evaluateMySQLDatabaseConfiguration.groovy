@@ -20,9 +20,8 @@ def call(Closure body) {
     body()
     String uuid = UUID.randomUUID()
     config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
-    environment {
-        MYSQL_UUID = config.uuid
-    }
+    env.MYSQL_UUID = config.uuid
+
     // Set any unprovided configuration values to defaults
     // Set any unprovided configuration to random generated.
     if (config.dbName == null || config.dbName == '') {

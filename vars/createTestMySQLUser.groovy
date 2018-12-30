@@ -15,7 +15,8 @@
 */
 def call(Closure body) {
     def config = evaluateMySQLDatabaseConfiguration(body)
-    
+
+    echo "MYSQL TEST UUID: ${env.MYSQL_UUID}"
     // Define the test user parameters here
     String test_username = "testdb_user_${config.uuid}"
     def test_user = test_username.take(32)

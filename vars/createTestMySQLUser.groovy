@@ -17,7 +17,8 @@ def call(Closure body) {
     def config = evaluateMySQLDatabaseConfiguration(body)
     
     // Define the test user parameters here
-    def test_user = "testdb_user_${config.uuid}"
+    String test_username = "testdb_user_${config.uuid}"
+    def test_user = test_username.take(32)
     def test_user_pwd = "testdb_password_${config.uuid}"
     
     // Run shell commands to create the user here

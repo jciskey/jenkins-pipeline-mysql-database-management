@@ -11,10 +11,11 @@
 */
 def call(Closure body) {
     def config = evaluateMySQLDatabaseConfiguration(body)
-    
-    // Define the test user parameters here
-    def test_user = config.testUser ?: "testdb_user_${env.BUILD_NUMBER}"
-    
+    if (config.testUser == null || config.testUser == '') {
+        // Define the test user parameters here
+        String test_username = "testdb_user_${env.MYSQL_UUID}"
+        def test_user = test_username.take(32)
+    }
     // Run shell commands to drop the user here
     def DROP_SQL = "DROP USER '${test_user}'@'%';"
     def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'%';" +

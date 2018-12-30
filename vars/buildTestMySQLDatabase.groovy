@@ -15,15 +15,15 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-String call(body) {
-    def config = evaluateMySQLDatabaseConfiguration(body)
+String call(Boolean newDB = true,  Closure body) {
     // Create a unique id to use for database names and user accounts.
     String uuid = UUID.randomUUID()
     config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
     // Store UUID into a Jenkins environment variable.
-    if (env.MYSQL_UUID == null || env.MYSQL_UUID == '' || config.newDB == true) {
+    if (env.MYSQL_UUID == null || env.MYSQL_UUID == '' || newDB == true) {
         env.MYSQL_UUID = config.uuid
     }
+    def config = evaluateMySQLDatabaseConfiguration(body)
 
     // Create the test database
     def createdDatabaseName = createMySQLDatabase {

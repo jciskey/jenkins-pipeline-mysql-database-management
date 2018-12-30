@@ -18,9 +18,15 @@ def call(Closure body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
-    
+    String uuid = UUID.randomUUID()
+    def modifieduuid = uuid.replaceAll('-','_')
+
     // Set any unprovided configuration values to defaults
-    config.dbName = config.dbName ?: "testdb_${env.BUILD_NUMBER}"
+    // Set any unprovided configuration to random generated.
+    if (dbName == null || dbName == '') {
+        String dbNameConstructed = "testdb_" + modifieduuid + "_" + env.BUILD_NUMBER
+        config.dbName = dbNameConstructed
+    }
     config.mysqlPath = config.mysqlPath ?: '/usr/bin/mysql'
     config.mysqlPort = config.mysqlPort ?: 3306
     

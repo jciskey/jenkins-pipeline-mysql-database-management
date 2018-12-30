@@ -16,12 +16,12 @@
             testUserPassword: The password of the test user
 */
 String call(Boolean newDB = true,  Closure body) {
-    // Create a unique id to use for database names and user accounts.
-    String uuid = UUID.randomUUID()
-    config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
     // Store UUID into a Jenkins environment variable.
     if (env.MYSQL_UUID == null || env.MYSQL_UUID == '' || newDB == true) {
-        env.MYSQL_UUID = config.uuid
+        // Create a unique id to use for database names and user accounts.
+        String uuid = UUID.randomUUID()
+        uuidconstruct = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
+        env.MYSQL_UUID = uuidconstruct
     }
     def config = evaluateMySQLDatabaseConfiguration(body)
 

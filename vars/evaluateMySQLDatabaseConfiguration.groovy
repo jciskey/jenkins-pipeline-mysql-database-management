@@ -23,7 +23,7 @@ def call(Closure body) {
 
     // Set any unprovided configuration values to defaults
     // Set any unprovided configuration to random generated.
-    if (dbName == null || dbName == '') {
+    if (config.dbName == null || config.dbName == '') {
         String dbNameConstructed = "testdb_" + modifieduuid + "_" + env.BUILD_NUMBER
         config.dbName = dbNameConstructed
     }

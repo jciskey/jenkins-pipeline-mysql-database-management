@@ -19,12 +19,12 @@ def call(Closure body) {
     body.delegate = config
     body()
     String uuid = UUID.randomUUID()
-    config.uuid  = uuid.replaceAll('-','_')
+    config.uuid  = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
 
     // Set any unprovided configuration values to defaults
     // Set any unprovided configuration to random generated.
     if (config.dbName == null || config.dbName == '') {
-        String dbNameConstructed = "testdb_" + config.uuid + "_" + env.BUILD_NUMBER
+        String dbNameConstructed = "testdb_" + config.uuid
         config.dbName = dbNameConstructed
     }
     config.mysqlPath = config.mysqlPath ?: '/usr/bin/mysql'

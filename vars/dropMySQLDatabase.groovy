@@ -18,6 +18,6 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String mysql
     def dropconfig = evaluateMySQLConfiguration(configuration)
     // Run shell commands to drop the database here
     def DROP_SQL = "DROP DATABASE IF EXISTS ${dbSchemaName};"
-    def SHELL_CMD = "\"${mysqlPath}\" -u \"${dbUserName}\" --password=\"${dbPassword}\" <<-EOF\n${DROP_SQL}\nEOF"
+    def SHELL_CMD = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
     sh "${SHELL_CMD}"
 }

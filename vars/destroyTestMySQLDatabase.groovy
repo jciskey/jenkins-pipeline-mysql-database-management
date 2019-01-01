@@ -13,18 +13,10 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String mysql
     echo "DB User: ${dbUserName}"
     echo "DB Pass: ${dbPassword}"
     echo "DB Name: ${dbSchemaName}"
-    def body = {
-        mysqlPath = mysqlPath
-        mysqlPort = mysqlPort
-        dbSchemaName = dbName
-        dbUserName = dbUser
-        dbPassword = dbPass
-    }
     
     // Destroy the test database
     dropMySQLDatabase(dbUserName, dbPassword, dbSchemaName)
 
     // Destroy the test user
     dropTestMySQLUser(dbUserName, dbPassword, dbSchemaName)
-
     }

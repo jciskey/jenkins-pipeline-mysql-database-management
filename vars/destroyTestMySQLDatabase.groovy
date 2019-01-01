@@ -16,9 +16,9 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String mysql
     def body = {
         mysqlPath = mysqlPath
         mysqlPort = mysqlPort
-        dbName = dbSchemaName
-        dbUser = dbUserName
-        dbPass = dbPassword
+        dbSchemaName = dbName
+        dbUserName = dbUser
+        dbPassword = dbPass
     }
     
     // Destroy the test database

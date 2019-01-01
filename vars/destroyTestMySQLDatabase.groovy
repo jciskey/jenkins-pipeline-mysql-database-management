@@ -8,7 +8,7 @@
         dbUser:    The name of the database user to destroy the database with.
         dbPass:    The password of the database user.
 */
-def call(String mysqlPath, String mysqlPort, String dbName, String dbUser, String dbPass) {
+def call(String dbUser, String dbPass, String dbName, String mysqlPath = '', String mysqlPort = '') {
     def body = {
         mysqlPath = mysqlPath
         mysqlPort = mysqlPort

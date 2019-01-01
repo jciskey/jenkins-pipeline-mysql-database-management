@@ -18,7 +18,9 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String dbDro
     configuration.mysqlPath = mysqlPath
     configuration.mysqlPort = mysqlPort
     def dropconfig = evaluateMySQLConfiguration(configuration)
-
+    echo "====================================== Debug ======================================================="
+    echo "Username to drop: ${dbDropUserName}"
+    echo "====================================== /Debug ======================================================="
     if (dbDropUserName == null || dbDropUserName == '') {
         // Define the test user parameters here
         String test_username = "testdb_user_${env.MYSQL_UUID}"

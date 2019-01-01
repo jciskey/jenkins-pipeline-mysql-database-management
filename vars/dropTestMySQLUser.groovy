@@ -27,10 +27,10 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String dbDro
 
     // Run shell commands to drop the user here
     def DROP_SQL = "DROP USER '${test_user};"
-    def SHELL_CMD = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
-    sh "${SHELL_CMD}"
+    def SHELL_CMD1 = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
+    sh "${SHELL_CMD1}"
     def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}';"
     def FLUSH = "FLUSH PRIVILEGES;"
-    def SHELL_CMD = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}${REVOKE_SQL}${FLUSH}\nEOF"
-    sh "${SHELL_CMD}"
+    def SHELL_CMD2 = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}${REVOKE_SQL}${FLUSH}\nEOF"
+    sh "${SHELL_CMD2}"
 }

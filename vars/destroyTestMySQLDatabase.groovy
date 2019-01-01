@@ -22,8 +22,8 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String mysql
     }
     
     // Destroy the test database
-    dropMySQLDatabase(body)
-    
+    dropMySQLDatabase(dbUserName, dbPassword, dbSchemaName)
+
     // Destroy the test user
     dropTestMySQLUser(body)
 }

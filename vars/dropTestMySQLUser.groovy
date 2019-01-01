@@ -26,7 +26,7 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String dbDro
     }
 
     // Run shell commands to drop the user here
-    def DROP_SQL = "DROP USER '${test_user}'@'%';"
+    def DROP_SQL = "DROP USER '${test_user};"
     def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'%';" +
         "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'localhost';"
     def SHELL_CMD = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}${REVOKE_SQL}\nEOF"

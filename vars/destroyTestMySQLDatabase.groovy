@@ -9,10 +9,6 @@
         dbPassword:    The password of the database user.
 */
 def call(String dbUserName, String dbPassword, String dbSchemaName, String mysqlPath = '', String mysqlPort = '') {
-    echo "====================================== Debug ======================================================="
-    echo "DB User: ${dbUserName}"
-    echo "DB Pass: ${dbPassword}"
-    echo "DB Name: ${dbSchemaName}"
     
     // Destroy the test database
     dropMySQLDatabase(dbUserName, dbPassword, dbSchemaName)

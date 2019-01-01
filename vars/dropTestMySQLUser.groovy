@@ -22,7 +22,7 @@ def call(String dbUserName, String dbPassword, String dbSchemaName, String dbDro
     if (dbDropUserName.isEmpty()) {
         // Define the test user parameters here
         String test_username = "testdb_user_${env.MYSQL_UUID}"
-        test_user = test_username.take(32)
+        test_user = test_username.take(30)
     }
 
     // Run shell commands to drop the user here

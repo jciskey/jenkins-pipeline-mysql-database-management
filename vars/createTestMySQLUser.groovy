@@ -18,7 +18,7 @@ def call(Closure body) {
 
     // Define the test user parameters here
     String test_username = "testdb_user_${env.MYSQL_UUID}"
-    def test_user = test_username.take(32)
+    def test_user = test_username.take(30)
     def test_user_pwd = "testdb_password_${env.MYSQL_UUID}"
     
     // Run shell commands to create the user here

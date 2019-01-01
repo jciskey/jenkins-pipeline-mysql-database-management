@@ -9,6 +9,10 @@
         dbPass:    The password of the database user.
 */
 def call(String dbUser, String dbPass, String dbName, String mysqlPath = '', String mysqlPort = '') {
+    echo "====================================== Debug ======================================================="
+    echo "DB User: ${dbUser}"
+    echo "DB Pass: ${dbPass}"
+    echo "DB Name: ${dbName}"
     def body = {
         mysqlPath = mysqlPath
         mysqlPort = mysqlPort

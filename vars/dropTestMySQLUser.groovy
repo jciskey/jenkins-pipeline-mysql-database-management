@@ -9,12 +9,11 @@
         testUser:  The username of the test user to be dropped. Default: "testdb_user_${env.BUILD_NUMBER}"
         
 */
-def call(String dbUserName, String dbPassword, String dbSchemaName, String dbDropUserName = '', String mysqlPath = '', String mysqlPort = '') {
+def call(String dbUserName, String dbPassword, String dbDropUserName = '', String mysqlPath = '', String mysqlPort = '') {
 
     configuration = [:]
     configuration.dbUser = dbUserName
     configuration.dbPass = dbPassword
-    configuration.dbName = dbSchemaName
     configuration.mysqlPath = mysqlPath
     configuration.mysqlPort = mysqlPort
     def dropconfig = evaluateMySQLConfiguration(configuration)

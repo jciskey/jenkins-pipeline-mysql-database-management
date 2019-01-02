@@ -8,11 +8,11 @@
         dbUserName:    The name of the database user to destroy the database with.
         dbPassword:    The password of the database user.
 */
-def call(String dbUserName, String dbPassword, String dbSchemaName, String mysqlPath = '', String mysqlPort = '') {
+def call(String dbUserName, String dbPassword, String dbSchemaName, String dbUserNameDrop = '', String mysqlPath = '', String mysqlPort = '') {
     
     // Destroy the test database
     dropMySQLDatabase(dbUserName, dbPassword, dbSchemaName)
 
     // Destroy the test user
-    dropTestMySQLUser(dbUserName, dbPassword, dbSchemaName)
+    dropTestMySQLUser(dbUserName, dbPassword, dbUserNameDrop)
     }

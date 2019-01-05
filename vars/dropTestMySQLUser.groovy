@@ -23,6 +23,10 @@ def call(String dbUserName, String dbPassword, String dbDropUserName = '', Strin
         String test_username = "testdb_user_${env.MYSQL_UUID}"
         test_user = test_username.take(30)
     }
+    else
+    {
+        test_user = dbDropUserName
+    }
 
     // Run shell commands to drop the user here
     def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'%'; REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'localhost';"

@@ -4,15 +4,20 @@
     Accepted Parameters:
         mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
         mysqlPort: The port to use to connect to MySQL. Default: 3306
-        dbName:    The name of the database to drop. Default: "testdb_${env.BUILD_NUMBER}"
-        dbUser:    The name of the database user to drop the database with.
-        dbPass:    The password of the database user.
+        dbSchemaName:    The name of the database to drop. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUserName:    The name of the database user to drop the database with.
+        dbPassword:    The password of the database user.
 */
-def call(Closure body) {
-    def config = evaluateMySQLDatabaseConfiguration(body)
-    
+def call(String dbUserName, String dbPassword, String dbSchemaName, String mysqlPath = '', String mysqlPort = '') {
+    configuration = [:]
+    configuration.dbUser = dbUserName
+    configuration.dbPass = dbPassword
+    configuration.dbName = dbSchemaName
+    configuration.mysqlPath = mysqlPath
+    configuration.mysqlPort = mysqlPort
+    def dropconfig = evaluateMySQLConfiguration(configuration)
     // Run shell commands to drop the database here
-    def DROP_SQL = "DROP DATABASE IF EXISTS ${config.dbName};"
-    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
+    def DROP_SQL = "DROP DATABASE IF EXISTS ${dbSchemaName};"
+    def SHELL_CMD = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
     sh "${SHELL_CMD}"
 }

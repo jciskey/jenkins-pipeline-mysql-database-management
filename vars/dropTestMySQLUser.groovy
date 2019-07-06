@@ -9,16 +9,31 @@
         testUser:  The username of the test user to be dropped. Default: "testdb_user_${env.BUILD_NUMBER}"
         
 */
-def call(Closure body) {
-    def config = evaluateMySQLDatabaseConfiguration(body)
-    
-    // Define the test user parameters here
-    def test_user = config.testUser ?: "testdb_user_${env.BUILD_NUMBER}"
-    
+def call(String dbUserName, String dbPassword, String dbDropUserName = '', String mysqlPath = '', String mysqlPort = '') {
+
+    configuration = [:]
+    configuration.dbUser = dbUserName
+    configuration.dbPass = dbPassword
+    configuration.mysqlPath = mysqlPath
+    configuration.mysqlPort = mysqlPort
+    def dropconfig = evaluateMySQLConfiguration(configuration)
+
+    if (dbDropUserName.isEmpty()) {
+        // Define the test user parameters here
+        String test_username = "testdb_user_${env.MYSQL_UUID}"
+        test_user = test_username.take(30)
+    }
+    else
+    {
+        test_user = dbDropUserName
+    }
+
     // Run shell commands to drop the user here
-    def DROP_SQL = "DROP USER '${test_user}'@'%';"
-    def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'%';" +
-        "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'localhost';"
-    def SHELL_CMD = "\"${config.mysqlPath}\" -u \"${config.dbUser}\" --password=\"${config.dbPass}\" <<-EOF\n${DROP_SQL}${REVOKE_SQL}\nEOF"
-    sh "${SHELL_CMD}"
+    def REVOKE_SQL = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'%'; REVOKE ALL PRIVILEGES, GRANT OPTION FROM '${test_user}'@'localhost';"
+    def FLUSH = "FLUSH PRIVILEGES;"
+    def SHELL_CMD1 = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${REVOKE_SQL}${FLUSH}\nEOF"
+    sh "${SHELL_CMD1}"
+    def DROP_SQL = "DROP USER '${test_user}'; DROP USER '${test_user}'@'localhost';"
+    def SHELL_CMD2 = "\"${dropconfig.mysqlPath}\" -u \"${dropconfig.dbUser}\" --password=\"${dropconfig.dbPass}\" <<-EOF\n${DROP_SQL}\nEOF"
+    sh "${SHELL_CMD2}"
 }

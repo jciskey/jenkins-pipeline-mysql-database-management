@@ -4,22 +4,15 @@
     Accepted Parameters:
         mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
         mysqlPort: The port to use to connect to MySQL. Default: 3306
-        dbName:    The name of the database to destroy. Default: "testdb_${env.BUILD_NUMBER}"
-        dbUser:    The name of the database user to destroy the database with.
-        dbPass:    The password of the database user.
+        dbSchemaName:    The name of the database to destroy. Default: "testdb_${env.BUILD_NUMBER}"
+        dbUserName:    The name of the database user to destroy the database with.
+        dbPassword:    The password of the database user.
 */
-def call(String mysqlPath, String mysqlPort, String dbName, String dbUser, String dbPass) {
-    def body = {
-        mysqlPath = mysqlPath
-        mysqlPort = mysqlPort
-        dbName = dbName
-        dbUser = dbUser
-        dbPass = dbPass
-    }
+def call(String dbUserName, String dbPassword, String dbSchemaName, String dbUserNameDrop = '', String mysqlPath = '', String mysqlPort = '') {
     
     // Destroy the test database
-    dropMySQLDatabase(body)
-    
+    dropMySQLDatabase(dbUserName, dbPassword, dbSchemaName)
+
     // Destroy the test user
-    dropTestMySQLUser(body)
-}
+    dropTestMySQLUser(dbUserName, dbPassword, dbUserNameDrop)
+    }

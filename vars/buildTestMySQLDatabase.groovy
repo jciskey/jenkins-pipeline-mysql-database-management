@@ -7,6 +7,7 @@
         dbName:    The name of the database to create. Default: "testdb_${env.BUILD_NUMBER}"
         dbUser:    The name of the database user to create the database with.
         dbPass:    The password of the database user.
+        newDB:      Boolean value to setup a new DB. Default: true.
     
     Returns the name of the created database as well as test user credentials in a Map.
         Map Keys:
@@ -14,9 +15,16 @@
             testUsername:     The username of the test user
             testUserPassword: The password of the test user
 */
-String call(body) {
+String call(Boolean newDB = true,  Closure body) {
+    // Store UUID into a Jenkins environment variable.
+    if (env.MYSQL_UUID == null || env.MYSQL_UUID == '' || newDB == true) {
+        // Create a unique id to use for database names and user accounts.
+        String uuid = UUID.randomUUID()
+        uuidconstruct = uuid.replaceAll('-','_') + "_" + env.BUILD_NUMBER
+        env.MYSQL_UUID = uuidconstruct
+    }
     def config = evaluateMySQLDatabaseConfiguration(body)
-    
+
     // Create the test database
     def createdDatabaseName = createMySQLDatabase {
         mysqlPath = config.mysqlPath

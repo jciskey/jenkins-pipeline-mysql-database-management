@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 /*
-    Evaluates a block/closure of database configuration information and converts it into an object.
+    Evaluates a map of database configuration information.
     
     Accepted Parameters:
         mysqlPath: The system path to the MySQL binary. Default: /usr/bin/mysql
@@ -12,13 +12,7 @@
     
     Returns the parsed database configuration object.
 */
-def call(Closure body) {
-    // Evaluate the body block, and collect configuration into the object
-    def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
-    body()
-
+def call(Map config) {
     // Set any unprovided configuration values to defaults
     // Set any unprovided configuration to random generated.
     if (config.dbName == null || config.dbName == '') {
